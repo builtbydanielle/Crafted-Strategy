@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Danielle Denton &middot; Crafted Strategy</title>
+<meta name="description" content="Marketing engineering, AI integration, and full-stack development. Middle Georgia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#031926;
+  --prussian:#102149;
+  --lilac:#714798;
+  --sage:#9DBEBB;
+  --ghost:#E9ECF7;
+  --rule:rgba(16,33,73,.16);
+  --rule-strong:rgba(16,33,73,.34);
+  --dim:rgba(3,25,38,.62);
+  --display:"Bricolage Grotesque",system-ui,sans-serif;
+  --body:"Archivo",system-ui,sans-serif;
+  --mono:Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+  --rail:14rem;
+  --pad:clamp(1.25rem,4vw,4rem);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--ghost);color:var(--ink);
+  font-family:var(--body);font-size:clamp(1rem,.96rem + .2vw,1.125rem);
+  font-weight:400;line-height:1.6;letter-spacing:-.003em;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.02;margin:0;letter-spacing:-.025em}
+a{color:inherit}
+::selection{background:var(--lilac);color:var(--ink)}
+
+/* ---------- index rail ---------- */
+.rail{display:none}
+@media (min-width:1100px){
+  .rail{
+    display:block;position:fixed;top:0;left:0;width:var(--rail);height:100vh;
+    padding:2.5rem 1.25rem 2.5rem 2rem;border-right:1px solid var(--rule);
+    font-family:Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";z-index:40;
+  }
+  .rail a{
+    display:block;
+    padding:.5rem 0;color:var(--dim);text-decoration:none;
+    font-size:.78rem;letter-spacing:.02em;font-weight:500;
+    border-top:1px solid transparent;transition:color .18s;
+  }
+  .rail a:hover{color:var(--prussian)}
+  .rail a.on{color:var(--ink);font-weight:600}
+  .rail a.on::after{
+    content:"";position:absolute;left:0;top:.62rem;width:3px;height:1.15rem;
+    background:var(--lilac);transform:translateX(-1rem);
+  }
+  .rail a{position:relative}
+  .rail a.rail-mark{
+    font-family:var(--display);font-size:1.05rem;line-height:1.15;letter-spacing:-.03em;
+    margin-bottom:2.75rem;display:block;font-weight:800;color:var(--ink);padding:0;
+  }
+  .rail a.rail-mark:hover{color:var(--lilac)}
+  .rail-foot{
+    position:absolute;bottom:2.5rem;left:2rem;right:1.25rem;color:var(--dim);
+    font-size:.7rem;line-height:1.6;letter-spacing:.01em;
+    padding-top:.9rem;border-top:1px solid var(--rule);
+  }
+  .shell{margin-left:var(--rail)}
+}
+
+/* ---------- shared section grid ---------- */
+.sec{
+  padding:clamp(3.5rem,7vw,6.5rem) var(--pad);
+  border-top:1px solid var(--rule);
+  display:grid;grid-template-columns:1fr;gap:2rem;
+}
+@media (min-width:820px){
+  .sec{grid-template-columns:9.5rem minmax(0,1fr);gap:clamp(2rem,4vw,4.5rem)}
+}
+.gutter{font-family:Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";line-height:1.5}
+.gutter .nm{
+  display:block;font-size:.78rem;font-weight:500;letter-spacing:.06em;
+  color:var(--ink);text-transform:none;
+}
+.gutter .tally{
+  display:block;margin-top:.2rem;font-size:.72rem;font-weight:400;
+  letter-spacing:.04em;color:var(--dim);text-transform:none;
+}
+@media (min-width:820px){
+  .gutter{position:sticky;top:2.5rem;align-self:start}
+}
+.sec-h{font-size:clamp(1.9rem,4vw,2.9rem); color:var(--lilac);margin-bottom:1.5rem;max-width:20ch}
+.lede{max-width:62ch;font-size:.98em}
+
+/* ---------- hero ---------- */
+.hero{background: #031926;
+background: linear-gradient(312deg,rgba(3, 25, 38, 1) 0%, rgba(16, 33, 73, 1) 18%, rgba(113, 71, 152, 1) 39%, rgba(157, 190, 187, 1) 74%);
+	color:var(--ghost);padding:clamp(3rem,7vw,5.5rem) var(--pad) clamp(3rem,6vw,4.5rem);border-top:0}
+.hero-top{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:baseline;
+  font-family:Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
+.hero h1{
+  font-size:clamp(2.6rem,8.2vw,5rem);font-weight:800;margin:clamp(2rem,5vw,3.5rem) 0 0;
+  max-width:16ch;color:var(--ghost);
+}
+.hero h1 em{font-style:normal;color:var(--prussian)}
+.hero-sub{max-width:52ch;margin:1.5rem 0 0;color:rgba(233,236,247,.78);font-size:1.06em}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2.25rem}
+.btn{
+  font-family:Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:.85rem 1.35rem;text-decoration:none;border:1px solid rgba(233,236,247,.3);
+  color:var(--ghost);transition:background .18s,color .18s,border-color .18s;
+}
+.btn:hover{background:var(--sage);color:var(--ink);border-color:var(--sage)}
+.btn.solid{background:var(--ink);border-color:var(--sage);color:var(--sage)}
+.btn.solid:hover{background:var(--lilac);border-color:var(--ghost)}
+
+/* ---------- signature: readout ---------- */
+.readout{
+  margin-top:clamp(1rem,2vw,4rem);border:1px solid rgba(233,236,247,.18);
+  background:var(--prussian);font-family:Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+}
+.readout-bar{
+  display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  padding:.7rem 1rem;border-bottom:1px solid rgba(233,236,247,.14);
+  font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(233,236,247,.55);
+}
+.readout ol{list-style:none;margin:0;padding:.4rem 0}
+  .readout li{
+  display:grid;grid-template-columns:1fr auto;gap:.75rem;align-items:baseline;
+  padding:.62rem 1rem;font-size:.86rem;color:rgba(233,236,247,.9);
+  opacity:0;transform:translateY(.35rem);
+}
+.readout.live li{animation:tick .5s ease forwards}
+.readout li:nth-child(1){animation-delay:.25s}
+.readout li:nth-child(2){animation-delay:.6s}
+.readout li:nth-child(3){animation-delay:.95s}
+.readout li:nth-child(4){animation-delay:1.3s}
+.readout li:nth-child(5){animation-delay:1.65s}
+@keyframes tick{to{opacity:1;transform:none}}
+.readout .st{font-size:.74rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.ok{color:var(--sage)}
+.flag{color:var(--lilac)}
+.flag::before{content:"\25C6\00a0"}
+.ok::before{content:"\25CB\00a0"}
+@media (prefers-reduced-motion:reduce){
+  .readout li{animation:none;opacity:1;transform:none}
+}
+
+/* ---------- services ---------- */
+.svc{border-top:1px solid var(--rule-strong)}
+.svc-row{
+  display:grid;grid-template-columns:1fr;gap:.35rem;
+  padding:1.15rem 0;border-bottom:1px solid var(--rule);
+}
+@media (min-width:700px){
+  .svc-row{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:2rem;align-items:baseline}
+}
+.svc-broke{font-family:var(--body);font-style:italic;font-weight:400;color:var(--dim);font-size:.78em}
+.svc-offer{font-family:var(--display);font-weight:500;letter-spacing:-.015em;font-size:.8em}
+.svc-row:hover .svc-offer{color:var(--prussian)}
+
+/* ---------- experience ---------- */
+.job{padding:0 0 1.5rem;margin-bottom:1.5rem;border-bottom:1px solid var(--rule)}
+.job:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+.job-sum{
+  display:block;cursor:pointer;list-style:none;padding:.25rem 0;
+}
+.job-sum::-webkit-details-marker{display:none}
+.job-sum:focus-visible{outline:2px solid var(--lilac);outline-offset:3px}
+.job-h{font-size:clamp(1.25rem,2.6vw,1.6rem);font-weight:700}
+.job-org{font-family:var(--mono);font-size:.9rem;letter-spacing:.13em;text-transform:uppercase;color:var(--prussian);margin:.6rem 0 0}
+.job-meta{font-family:Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";letter-spacing:.1em;color:var(--dim);margin:.3rem 0 0}
+.job-teaser{color:var(--dim);font-size:.95rem;margin:.55rem 0 0;max-width:66ch}
+.job-more{
+  font-family:var(--mono);font-size:.64rem;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--lilac);margin:.85rem 0 0;
+}
+.job-more::after{content:"Read more  +"}
+.job[open] .job-more::after{content:"Show less  \2212"}
+.job-sum:hover .job-more{color:var(--prussian)}
+.job-body{margin-top:.5rem}
+.group{margin:2rem 0 0}
+.group-h{
+  font-family:Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--lilac);margin:0 0 .85rem;padding-left:.9rem;border-left:2px solid var(--lilac);
+}
+ul.pts{list-style:none;margin:0;padding:0}
+ul.pts li{position:relative;padding-left:1.15rem;margin-bottom:.6rem;max-width:74ch}
+ul.pts li::before{
+  content:"";position:absolute;left:0;top:.72em;width:.42rem;height:1px;background:var(--sage);
+}
+
+/* ---------- case cards ---------- */
+.case{
+  background:#fff;border:1px solid var(--rule);
+  padding:clamp(1.35rem,2.4vw,2rem);margin-bottom:1rem;
+  display:grid;grid-template-columns:1fr;gap:1.5rem;
+}
+.case:last-child{margin-bottom:0}
+@media (min-width:900px){
+  .case{grid-template-columns:minmax(0,1.3fr) repeat(3,minmax(0,1fr));gap:clamp(1.5rem,2.5vw,2.5rem)}
+}
+.case-h{font-size:clamp(1.1rem,1.9vw,1.4rem);font-weight:700;line-height:1.06;max-width:22ch}
+.case-stack{
+  font-family:var(--mono);font-size:.66rem;font-weight:600;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--lilac);margin:.75rem 0 0;line-height:1.85;
+}
+.case-lab{
+  font-family:var(--mono);font-size:.62rem;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--prussian);margin:0 0 .6rem;
+}
+.case-col p{margin:0;font-size:.92rem;line-height:1.55;color:var(--ink)}
+
+/* ---------- projects ---------- */
+.proj{border-top:1px solid var(--rule);padding:1.5rem 0}
+.proj:first-of-type{border-top:1px solid var(--rule-strong)}
+.proj-h{font-size:1.15rem;font-weight:700;display:flex;flex-wrap:wrap;gap:.65rem;align-items:baseline}
+.tag{
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:.2rem .5rem;border:1px solid var(--rule-strong);color:var(--prussian);font-weight:500;
+}
+.stack{font-family:var(--mono);font-size:.76rem;font-weight:500;color:var(--dim);margin:.55rem 0 .6rem;line-height:1.7;max-width:78ch}
+.proj p{margin:0;max-width:74ch}
+
+/* ---------- skills ---------- */
+.skill-block{padding:1.1rem 0;border-top:1px solid var(--rule);display:grid;grid-template-columns:1fr;gap:.5rem}
+.skill-block:first-of-type{border-top:1px solid var(--rule-strong)}
+@media (min-width:760px){.skill-block{grid-template-columns:12rem minmax(0,1fr);gap:2rem}}
+.skill-lab{font-family:var(--mono);font-size:.66rem;letter-spacing:.13em;text-transform:uppercase;color:var(--prussian);padding-top:.2rem}
+.chips{display:flex;flex-wrap:wrap;gap:.35rem}
+.chip{font-family:var(--mono);font-size:.76rem;font-weight:500;padding:.28rem .55rem;background:rgba(157,190,187,.28);color:var(--ink)}
+
+/* ---------- certs ---------- */
+.cert-grid{display:grid;grid-template-columns:1fr;gap:2rem}
+@media (min-width:760px){.cert-grid{grid-template-columns:repeat(3,1fr)}}
+.cert-h{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--lilac);margin:0 0 .8rem;padding-bottom:.4rem;border-bottom:1px solid var(--rule-strong)}
+.cert-grid ul{list-style:none;margin:0;padding:0;font-size:.95rem}
+.cert-grid li{margin-bottom:.65rem;line-height:1.45}
+.cert-grid span{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;color:var(--dim);text-transform:uppercase;margin-top:.15rem}
+
+/* ---------- strengths ---------- */
+.str{border-left:2px solid var(--sage);padding-left:1.25rem;margin-bottom:1.4rem;max-width:70ch}
+
+/* ---------- contact ---------- */
+.end{background:var(--ink);color:var(--ghost);padding:clamp(3.5rem,8vw,6rem) var(--pad);border-top:0}
+.end h2{font-size:clamp(2rem,6vw,4rem);max-width:16ch;font-weight:800}
+.end h2 em{font-style:normal;color:var(--sage)}
+.end p{max-width:52ch;color:rgba(233,236,247,.75)}
+.end-links{display:flex;flex-wrap:wrap;gap:2rem;margin-top:2.5rem;font-family:var(--mono);font-size:1.2rem}
+.end-links a{color:var(--sage);text-decoration:none;border-bottom:1px solid rgba(165,148,172,.4);padding-bottom:.9rem}
+.end-links a:hover{color:var(--ghost);border-color:var(--ghost)}
+.colophon{
+  margin-top:clamp(3rem,7vw,5rem);padding-top:1.25rem;border-top:1px solid rgba(233,236,247,.14);
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;
+  color:rgba(233,236,247,.42);display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
+}
+:focus-visible{outline:2px solid var(--lilac);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<nav class="rail" aria-label="Section index">
+  <a class="rail-mark" href="#top" aria-label="Back to top">Crafted<br>Strategy</a>
+  <a href="#profile"><span>Profile</span></a>
+  <a href="#services"><span>Services</span></a>
+  <a href="#projects"><span>Portfolio</span></a>
+  <a href="#work"><span>Experience</span></a>
+  <a href="#lab"><span>Independent</span></a>
+  <a href="#skills"><span>Skills</span></a>
+  <a href="#certs"><span>Credentials</span></a>
+  <a href="#contact"><span>Contact</span></a>
+  <div class="rail-foot">Danielle D.<br>
+  Crafted Strategy<br>Macon, GA</div>
+</nav>
+
+<div class="shell">
+
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <div class="hero-top">
+      <span></span>
+    </div>
+
+    <h1>Diagnostics + development + AI <br><em>with something to show for</em></h1>
+    <p class="hero-sub">I identify costly gaps in marketing systems, then build or repair the websites, automations, integrations, and internal tools needed to fix them, often creating custom tools tailored for your unique business needs. I work across marketing engineering, AI integration, and full-stack development.</p>
+
+    <div class="hero-cta">
+      <a class="btn solid" href="#services">See what I can fix</a>
+      <a class="btn" href="#contact">Start a conversation</a>
+    </div>
+  </header>
+
+  <!-- PROFILE -->
+  <section class="sec" id="profile">
+    <div class="gutter"><span class="nm">Profile</span></div>
+    <div>
+      <h2 class="sec-h">I build  websites, systems, and tools that make marketing work</h2>
+      <p class="lede">My name is Danielle, and I am a marketing technology and software professional with 10 years of experience spanning B2B and SaaS marketing, full-stack development, AI integrations, CRM and email infrastructure, website modernization, SEO, analytics, automation, UX design, technical documentation and copywriting, and creative production.</p>
+      <p class="lede">I build  systems that connect strategy to action: production AI features, internal tools, responsive websites, marketing automation workflows, data-based campaigns, and customer-facing  experiences. Comfortable working between marketing, product design, engineering , leadership, and end users.</p>
+
+      <div class="skill-block" style="margin-top:2rem">
+        <div class="skill-lab">Areas of experience</div>
+        <div class="chips">
+          <span class="chip">Marketing Technology &amp; Operations</span>
+          <span class="chip">AI Integration &amp; Workflow Automation</span>
+          <span class="chip">Full-Stack Web Development</span>
+          <span class="chip">CRM &amp; Email Infrastructure</span>
+          <span class="chip">Website Strategy &amp; UX</span>
+          <span class="chip">SEO, Paid Search &amp; Analytics</span>
+          <span class="chip">Technical Product Work</span>
+          <span class="chip">E-Learning &amp; LMS Administration</span>
+          <span class="chip">Content, Design &amp; Brand Systems</span>
+          <span class="chip">Requirements, QA &amp; Documentation</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="sec" id="services">
+    <div class="gutter"><span class="nm">Services</span><span class="tally"></span></div>
+    <div>
+      <h2 class="sec-h">How I can help...</h2>
+		<p>I audit the systems behind your marketing to find where data is missing, inaccurate, or failing altogether. I check conversion tracking, consent behavior, phone attribution, form submissions, and the connections between them.<br><br><strong>The result is a site-specific assessment of what is working, what is not, and what needs to be fixed.</strong></p>
+		
+		<section class="readout" aria-label="Sample diagnostic readout">
+      <div class="readout-bar">
+        <span>Sample readout</span>
+      </div>
+      <ol>
+        <li><span>Analytics property installed</span><span class="st ok">Present</span></li>
+        <li><span>Ads conversion action configured</span><span class="st flag">None found</span></li>
+        <li><span>Tags held until consent</span><span class="st flag">Firing early</span></li>
+        <li><span>Phone leads attributed</span><span class="st flag">Untracked</span></li>
+        <li><span>Form submission recorded</span><span class="st flag">No signal</span></li>
+      </ol>
+    </section><br>
+		
+      <p class="lede"><strong>Each item addresses a specific operational problem that costs the business time, money, or both.</strong></p>
+
+      <div class="svc">
+        <div class="svc-row"><div class="svc-broke">Ads are running, conversions are not tracking</div><div class="svc-offer">Conversion Tracking Audit and Fix</div></div>
+        <div class="svc-row"><div class="svc-broke">Tags fire before anyone touches the cookie banner</div><div class="svc-offer">Consent and Privacy Compliance Review</div></div>
+        <div class="svc-row"><div class="svc-broke">Half the leads come by phone and none are attributed</div><div class="svc-offer">Call Tracking Setup</div></div>
+        <div class="svc-row"><div class="svc-broke">Emails break in Outlook and invert in dark mode</div><div class="svc-offer">HTML Email Development</div></div>
+        <div class="svc-row"><div class="svc-broke">Four AI subscriptions, no measured value</div><div class="svc-offer">AI Stack Assessment</div></div>
+     
+        <div class="svc-row"><div class="svc-broke">Someone rebuilds the same report by hand every month</div><div class="svc-offer">Reporting and Analytics Automation</div></div>
+        <div class="svc-row"><div class="svc-broke">Leads sit in an inbox for two days</div><div class="svc-offer">Lead Routing and Response Automation</div></div>
+        <div class="svc-row"><div class="svc-broke">Staff retype PDFs into a system all day</div><div class="svc-offer">Document Intake Automation</div></div>
+        <div class="svc-row"><div class="svc-broke">One person holds all the answers and is retiring</div><div class="svc-offer">Internal Knowledge Assistant</div></div>
+        <div class="svc-row"><div class="svc-broke">No idea what competitors launched until a customer says so</div><div class="svc-offer">Competitive Monitoring Tool</div></div>
+        <div class="svc-row"><div class="svc-broke">AI content dissolved the brand voice</div><div class="svc-offer">Brand Voice Model, fine-tuned</div></div>
+        <div class="svc-row"><div class="svc-broke">The site is slow and locked inside a page builder</div><div class="svc-offer">Next.js Site Rebuild</div></div>
+        <div class="svc-row"><div class="svc-broke">Employees paste client data into chatbots, no policy exists</div><div class="svc-offer">AI Use Policy and Shadow AI Audit</div></div>
+        <div class="svc-row"><div class="svc-broke">Continuing education and training run on spreadsheets</div><div class="svc-offer">Learning Platform Build and Management</div></div>
+        <div class="svc-row"><div class="svc-broke">A dozen AI tools and no instructions</div><div class="svc-offer">AI Literacy Training</div></div>
+      </div>
+    </div>
+  </section>
+	
+	<!-- PROJECTS -->
+  <section class="sec" id="projects">
+    <div class="gutter"><span class="nm">Portfolio</span></div>
+    <div>
+      <h2 class="sec-h">Selected professional work</h2>
+
+      <div class="case">
+        <div>
+          <h3 class="case-h">Production vehicle description generator</h3>
+          <p class="case-stack">Gemini API &middot; Node.js &middot; Ractive.js &middot; existing automotive software</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Problem</p>
+          <p>Users needed a faster way to create usable vehicle descriptions from inventory records already stored in the system.</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Work</p>
+          <p>Built a custom endpoint, connected the model API, mapped existing inventory fields, and added the feature to the production interface.</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Outcome</p>
+          <p>A working product feature that generates content from structured data and writes the result back into the existing record.</p>
+        </div>
+      </div>
+
+      <div class="case">
+        <div>
+          <h3 class="case-h">Conversion tracking and consent remediation</h3>
+          <p class="case-stack">GA4 &middot; Google Ads &middot; GTM &middot; CCPA &middot; HAR analysis</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Problem</p>
+          <p>Paid media conversions were misconfigured, and tracking behavior did not match the consent experience shown to visitors.</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Work</p>
+          <p>Traced live tag behavior, documented pre-consent tracking, rebuilt the conversion action, and moved measurement to a reliable native implementation.</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Outcome</p>
+          <p>Clearer attribution, better control over tag behavior, and a documented path to compliant measurement.</p>
+        </div>
+      </div>
+
+      <div class="case">
+        <div>
+          <h3 class="case-h">Legacy CRM performance and UX audit</h3>
+          <p class="case-stack">.NET &middot; DevExtreme &middot; JavaScript &middot; data loading &middot; UX prototyping</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Problem</p>
+          <p>A large CRM interface was slow, difficult to navigate, and carrying unnecessary front-end weight across views.</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Work</p>
+          <p>Identified a globally loaded 5.1 MB bundle, evaluated paging and filtering behavior, and designed a more efficient leads workspace.</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Outcome</p>
+          <p>A prioritized technical plan covering per-view assets, remote operations, caching, and specific interface improvements.</p>
+        </div>
+      </div>
+
+      <div class="case">
+        <div>
+          <h3 class="case-h">Website modernization and marketing control</h3>
+          <p class="case-stack">Next.js &middot; TypeScript &middot; React &middot; Tailwind CSS &middot; SEO &middot; consent architecture</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Problem</p>
+          <p>The existing site limited control over performance, content structure, product presentation, and marketing instrumentation.</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Work</p>
+          <p>Rebuilt the site as a custom component-based application with dedicated product pages, lead-generation elements, technical SEO, and consent-aware analytics.</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Outcome</p>
+          <p>A faster, more maintainable marketing platform that supports product communication, measurement, and future development.</p>
+        </div>
+      </div>
+
+      <div class="case">
+        <div>
+          <h3 class="case-h">CRM email analytics integration</h3>
+          <p class="case-stack">SendGrid API &middot; event data &middot; CRM interface &middot; JavaScript/C#</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Problem</p>
+          <p>Email performance lived outside the workflows used by the people responsible for customer and sales activity.</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Work</p>
+          <p>Connected delivery, open, and click data to the internal CRM and planned broader event tracking for bounces and unsubscribes.</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Outcome</p>
+          <p>Campaign activity became visible inside the system where teams already worked.</p>
+        </div>
+      </div>
+
+      <div class="case">
+        <div>
+          <h3 class="case-h">Competitive intelligence platform</h3>
+          <p class="case-stack">Next.js &middot; TypeScript &middot; Claude API &middot; Tavily Search</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Problem</p>
+          <p>Competitor activity surfaced only when a customer or salesperson happened to mention it, usually late.</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Work</p>
+          <p>Built an internal research application that combines web search with generative AI to collect, synthesize, and organize findings.</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Outcome</p>
+          <p>A single place to review market activity, with research that takes minutes rather than an afternoon.</p>
+        </div>
+      </div>
+
+      <div class="case">
+        <div>
+          <h3 class="case-h">HTML email generation and template system</h3>
+          <p class="case-stack">HTML/CSS &middot; TypeScript &middot; MSO conditional code &middot; dark mode &middot; SendGrid</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Problem</p>
+          <p>Campaign emails broke in Outlook, inverted in dark mode, and were rebuilt by hand for every send.</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Work</p>
+          <p>Standardized ten templates on a locked canonical structure and built an internal generator that produces campaign-ready code.</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Outcome</p>
+          <p>Consistent rendering across clients and far less setup time for every campaign that follows.</p>
+        </div>
+      </div>
+
+      <div class="case">
+        <div>
+          <h3 class="case-h">Interactive software coverage map</h3>
+          <p class="case-stack">D3.js &middot; TopoJSON &middot; JavaScript &middot; MediaWiki integration</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Problem</p>
+          <p>Prospects and staff had no clear way to see which states the software and forms actually supported.</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Work</p>
+          <p>Built a responsive state map with status levels, legends, filters, and hover detail, then surfaced the same data inside the internal wiki.</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Outcome</p>
+          <p>Coverage questions answered on the page instead of through a support conversation.</p>
+        </div>
+      </div>
+
+      <div class="case">
+        <div>
+          <h3 class="case-h">Dealer learning and certification platform</h3>
+          <p class="case-stack">SCORM &middot; Moodle &middot; WooCommerce &middot; Edwiser Bridge &middot; Vue.js</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Problem</p>
+          <p>Continuing education ran on manual processes, and course completions were not reporting reliably.</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Work</p>
+          <p>Deployed the platform with SCORM course packages and the supporting commerce workflow, then fixed a completion-tracking failure in the video shell.</p>
+        </div>
+        <div class="case-col">
+          <p class="case-lab">Outcome</p>
+          <p>A working learning and enrollment workflow with dependable completion records.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="sec" id="work">
+    <div class="gutter"><span class="nm">Experience</span></div>
+    <div>
+      <h2 class="sec-h">Experience</h2>
+
+      <details class="job">
+        <summary class="job-sum">
+          <h3 class="job-h">Technical Marketing &amp; Systems Developer</h3>
+          <p class="job-teaser">Website modernization, production AI features, CRM and email infrastructure, paid media and consent remediation, product interface work, and learning systems.</p>
+          <p class="job-more"></p>
+        </summary>
+
+        <div class="job-body">
+        <div class="group">
+          <p class="group-h">Website modernization, UX &amp; digital experience</p>
+          <ul class="pts">
+            <li>Rebuilt a company website from Squarespace into a custom Next.js 14 application using TypeScript, React, Tailwind CSS, and modular reusable components, including seven homepage sections and dedicated product pages.</li>
+            <li>Designed and implemented a CCPA-compliant consent architecture with tag governance, preference handling, and conditional analytics behavior across the website.</li>
+            <li>Created responsive landing pages, product interfaces, lead-generation components, interactive tools, sales-support pages, and digital experiences aligned with dealer and internal business needs.</li>
+            <li>Built an interactive multi-state software and forms coverage map using D3.js and TopoJSON, including legends, filters, state-level status distinctions, hover details, and mobile-responsive behavior.</li>
+            <li>Built a MediaWiki interactive map integration using Common.js to surface coverage information inside an internal knowledge system.</li>
+            <li>Improved site structure, usability, search visibility, content hierarchy, and conversion paths through SEO analysis, technical review, content development, and iterative UX refinements.</li>
+            <li>Wrote and edited web copy, product messaging, ads, landing-page content, email content, and sales enablement materials for multiple audiences and stages of the customer journey.</li>
+          </ul>
+        </div>
+
+        <div class="group">
+          <p class="group-h">AI integration, automation &amp; internal software</p>
+          <ul class="pts">
+            <li>Built and integrated an AI vehicle description generator directly into production automotive software using the Gemini API, Node.js, Ractive.js, existing inventory data, and a custom internal API endpoint.</li>
+            <li>Built WR-Tool, an internal competitive intelligence platform using Next.js, TypeScript, the Claude API, and Tavily search to collect, synthesize, and organize market intelligence for internal use.</li>
+            <li>Built Seek+Find, an agentic research tool using Next.js and the Claude API to run multi-step search and synthesis workflows.</li>
+            <li>Created an internal HTML email template generator that produces reusable, brand-aligned campaign code and reduces repetitive campaign setup.</li>
+            <li>Developed custom marketing automation tools, AI-assisted workflows, lead generators, internal web applications, and CRM-connected features using JavaScript, TypeScript, Node.js, C#, HTML/CSS, SQL, and PostgreSQL.</li>
+            <li>Wrote Python scripts to detect and analyze tracker behavior as part of privacy and compliance investigation work.</li>
+            <li>Evaluated and applied generative AI tools, prompting patterns, agentic workflows, retrieval concepts, and model-context integrations to practical marketing and product use cases.</li>
+            <li>Diagnosed integration issues across local development environments, APIs, PostgreSQL, Redis, Node runtimes, .NET services, and legacy application code while working within a mixed modern and legacy stack.</li>
+          </ul>
+        </div>
+
+        <div class="group">
+          <p class="group-h">CRM, email infrastructure &amp; marketing operations</p>
+          <ul class="pts">
+            <li>Designed a scalable HTML email template library supporting acquisition, retention, product, advocacy, and sales campaigns, with responsive layouts, MSO conditional handling, dark-mode support, and cross-client compatibility.</li>
+            <li>Standardized ten distinct email templates on a locked canonical structure (shared footer, MSO/Outlook conditional layer, and dark-mode palette) while varying layouts to prevent recipient fatigue.</li>
+            <li>Integrated SendGrid API data into the in-house CRM to surface email delivery, open, and click metrics and support campaign reporting within existing workflows.</li>
+            <li>Planned and supported expanded SendGrid event tracking for opens, clicks, bounces, unsubscribes, and delivery activity across CRM and product interfaces.</li>
+            <li>Created, tested, and deployed email campaigns supporting dealer acquisition, retention, product communication, legislative outreach, demos, follow-up, and partner communication.</li>
+            <li>Audited and rebuilt Google Ads conversion tracking across Performance Max campaigns spanning multiple state markets, including account review, keyword strategy, tracking validation, and optimization for lead quality.</li>
+            <li>Diagnosed broken website conversion actions misconfigured against a GA4 source and moved tracking to a native Google Ads conversion tag through GTM to restore reliable lead measurement.</li>
+            <li>Produced a state-by-state Performance Max budget reallocation analysis after surfacing a significant Florida-to-Georgia cost-per-conversion disparity.</li>
+            <li>Conducted a detailed Google Tag Manager and CCPA compliance investigation using HAR analysis to identify and remediate pre-consent tracking behavior tied to a disconnected cookie banner running alongside live GTM tracking.</li>
+          </ul>
+        </div>
+
+        <div class="group">
+          <p class="group-h">Product, interface &amp; systems improvement</p>
+          <ul class="pts">
+            <li>Designed and prototyped a modernized CRM Leads workspace with prioritized records, scrolling lead lists, persistent selection states, in-context lead details, full-search access, and direct navigation into lead records.</li>
+            <li>Conducted a technical performance audit of a legacy .NET CRM and identified high-impact improvements, including removal of a globally loaded 5.1 MB DevExtreme bundle, per-view asset loading, server-side grid operations, remote paging, filtering and sorting, and caching opportunities.</li>
+            <li>Completed a full technical audit of the staging site, producing a 127-item findings spreadsheet covering legal, SEO, and data integrity issues with prioritized remediation.</li>
+            <li>Rebuilt complex SaaS contract HTML into a more usable, printable, and maintainable interface, including consolidated schedules, improved grid layouts, a slide-out table of contents, signing guidance, and print-specific refinements.</li>
+            <li>Created product mockups, implementation guidance, technical requirements, and working prototypes to communicate proposed CRM and interface improvements to experienced internal stakeholders.</li>
+            <li>Worked across product, marketing, software development, management, and sales functions to clarify requests, translate business needs into technical work, test outcomes, and refine solutions.</li>
+          </ul>
+        </div>
+
+        <div class="group">
+          <p class="group-h">Training, learning systems &amp; documentation</p>
+          <ul class="pts">
+            <li>Built and deployed a continuing education platform on Moodle, WooCommerce, and Edwiser Bridge, including SCORM-compliant course packages and the supporting learning-commerce workflow.</li>
+            <li>Troubleshot a Vue.js and Vimeo SCORM shell completion-tracking failure to restore reliable course completion reporting.</li>
+            <li>Created technical documentation, process guidance, training material, product explanations, and user-facing content for software, marketing systems, and internal tools.</li>
+          </ul>
+        </div>
+        </div>
+      </details>
+
+      <details class="job">
+        <summary class="job-sum">
+          <h3 class="job-h">Marketing Developer</h3>
+          <p class="job-teaser">Data-driven email campaigns, Salesforce Marketing Cloud and Pardot builds, testing and QA across multiple accounts.</p>
+          <p class="job-more"></p>
+        </summary>
+
+        <div class="job-body">
+        <ul class="pts">
+          <li>Designed and deployed data-driven email campaigns across multiple accounts, improving open rates and engagement by 25% or more.</li>
+          <li>Built personalized and dynamic email content in Salesforce Marketing Cloud and Pardot using HTML, CSS, SQL, AMPscript, segmentation logic, and reusable campaign components.</li>
+          <li>Conducted A/B tests on subject lines, creative, messaging, and campaign elements to improve performance and guide future execution.</li>
+          <li>Used Litmus and related tools for responsive validation, cross-client rendering, link checks, email QA, and pre-deployment testing.</li>
+          <li>Conducted market research to identify high-opportunity territories and audience segments, informing campaign targeting and regional media placement strategy.</li>
+          <li>Supported workflow automation, campaign troubleshooting, list and data review, deployment, and performance monitoring in a fully remote environment.</li>
+        </ul>
+        </div>
+      </details>
+
+      <details class="job">
+        <summary class="job-sum">
+          <h3 class="job-h">Marketing Manager &amp; Web Developer</h3>
+          <p class="job-teaser">Multi-channel campaigns, WordPress and HubSpot management, and organic search growth for real estate teams.</p>
+          <p class="job-more"></p>
+        </summary>
+
+        <div class="job-body">
+        <ul class="pts">
+          <li>Developed and executed multi-channel marketing strategies for real estate teams, supporting brand growth, lead generation, audience engagement, and customer nurture.</li>
+          <li>Managed and maintained multiple WordPress websites and HubSpot CRM environments, including landing pages, forms, content updates, lead workflows, and campaign assets.</li>
+          <li>Improved organic website traffic by 34% through SEO strategy, content optimization, technical site improvements, and search-performance monitoring.</li>
+          <li>Created and supported email, social media, web, and lead-nurture campaigns and developed messaging and creative assets for listings, teams, and local markets.</li>
+          <li>Combined web development, marketing operations, design, analytics, and content responsibilities in a fast-moving multi-client environment.</li>
+        </ul>
+        </div>
+      </details>
+
+      <details class="job">
+        <summary class="job-sum">
+          <h3 class="job-h">Web/Graphic Design &amp; Marketing</h3>
+          <p class="job-teaser">Design and production across print, web, social, and video, plus client website builds and ongoing campaign work.</p>
+          <p class="job-more"></p>
+        </summary>
+
+        <div class="job-body">
+        <ul class="pts">
+          <li>Led design and production for print collateral, web graphics, email templates, social media assets, presentations, brand materials, photography, and video.</li>
+          <li>Designed, built, and maintained client-facing WordPress and Squarespace websites with a focus on responsive design, lead capture, usability, content accuracy, and brand consistency.</li>
+          <li>Managed client social media, email marketing, blog content, copywriting, digital campaigns, and ongoing web updates across varied industries.</li>
+          <li>Collaborated directly with clients to define goals, organize requirements, develop concepts, manage revisions, and deliver finished creative and digital work.</li>
+          <li>Applied Adobe Creative Suite, web design, content strategy, photography, videography, and editorial judgment to complete end-to-end marketing projects.</li>
+        </ul>
+        </div>
+      </details>
+
+      <details class="job">
+        <summary class="job-sum">
+          <h3 class="job-h">Founder</h3>
+          <p class="job-org">Crafted Strategy</p>
+          <p class="job-teaser">Independent AI integration, marketing engineering, and creative work.</p>
+          <p class="job-more"></p>
+        </summary>
+
+        <div class="job-body">
+        <ul class="pts">
+          <li>Offering AI integration, marketing engineering services, and creative solutions with a diagnostics-led approach that opens engagements from verifiable live site and ad findings.</li>
+        </ul>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  
+
+  <!-- INDEPENDENT -->
+  <section class="sec" id="lab">
+	  <div class="gutter"></div>
+    <div>
+      <h2 class="sec-h">Building for fun</h2>
+
+      <div class="proj">
+        <h3 class="proj-h">Custom Fine-Tuned Llama 3.2 3B Model <span class="tag">Completed</span></h3>
+        <p class="stack">Google Colab &middot; Unsloth &middot; LoRA/QLoRA &middot; Hugging Face Transformers &middot; GGUF &middot; Ollama</p>
+        <p>Prepared and curated a personal 70,000-word corpus, fine-tuned a Llama 3.2 3B model, quantized the result to GGUF, and served it locally through Ollama.</p>
+      </div>
+
+      <div class="proj">
+        <h3 class="proj-h">AI Encyclopedia 2026 <span class="tag">Published</span></h3>
+        <p class="stack">HTML &middot; CSS &middot; JavaScript &middot; GitHub Pages &middot; AI literacy content design</p>
+        <p>Built a self-contained AI literacy application with 145 terms and five study modes, designed to make modern AI concepts easier to learn and review.</p>
+      </div>
+
+      <div class="proj">
+        <h3 class="proj-h">Pro Photo Editor <span class="tag">In development</span></h3>
+        <p class="stack">React &middot; TypeScript &middot; Tauri &middot; Rust &middot; Canvas/WebGL</p>
+        <p>Developing a desktop photo editor centered on skin-tone protection, highlight preservation, readable shadows, emotional color consistency, custom looks, manual adjustments, comparison, undo, crop, grain, and tonal controls.</p>
+      </div>
+
+      <div class="proj">
+        <h3 class="proj-h">AI Support Quality Lab <span class="tag">In development</span></h3>
+        <p class="stack">Next.js &middot; TypeScript &middot; Tailwind CSS &middot; test planning &middot; knowledge-quality workflows</p>
+        <p>Established a portfolio application focused on evaluating AI-assisted support and knowledge quality, including project structure, test planning, and a clean non-demo presentation approach.</p>
+      </div>
+
+      <div class="proj">
+        <h3 class="proj-h">Various Website Demos <span class="tag">Portfolio</span></h3>
+        <p class="stack">Responsive web design &middot; branding &middot; conversion-focused content</p>
+        <p>Designed and built polished business websites for local prospects, combining brand presentation, menu and location content, and lead-oriented user flow.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="sec" id="skills">
+    <div class="gutter"><span class="nm">Skills</span></div>
+    <div>
+      <h2 class="sec-h">Technical inventory</h2>
+
+      <div class="skill-block"><div class="skill-lab">Languages</div><div class="chips">
+        <span class="chip">HTML5</span><span class="chip">CSS3</span><span class="chip">JavaScript</span><span class="chip">TypeScript</span><span class="chip">C#</span><span class="chip">SQL</span><span class="chip">Python</span><span class="chip">Rust exposure</span>
+      </div></div>
+
+      <div class="skill-block"><div class="skill-lab">Front-end &amp; full-stack</div><div class="chips">
+        <span class="chip">React</span><span class="chip">Next.js 14</span><span class="chip">Node.js</span><span class="chip">Ractive.js</span><span class="chip">Tailwind CSS</span><span class="chip">D3.js</span><span class="chip">TopoJSON</span><span class="chip">Responsive design</span><span class="chip">Component architecture</span><span class="chip">REST APIs</span>
+      </div></div>
+
+      <div class="skill-block"><div class="skill-lab">Data &amp; back-end</div><div class="chips">
+        <span class="chip">PostgreSQL</span><span class="chip">SQL querying</span><span class="chip">API integration</span><span class="chip">Node services</span><span class="chip">Mixed .NET/Node</span><span class="chip">Redis troubleshooting</span><span class="chip">WCF familiarity</span>
+      </div></div>
+
+      <div class="skill-block"><div class="skill-lab">AI &amp; machine learning</div><div class="chips">
+        <span class="chip">Claude API</span><span class="chip">Gemini API</span><span class="chip">OpenAI API</span><span class="chip">Prompt engineering</span><span class="chip">RAG concepts</span><span class="chip">Agentic workflows</span><span class="chip">MCP</span><span class="chip">LoRA/QLoRA</span><span class="chip">Unsloth</span><span class="chip">Ollama</span><span class="chip">Hugging Face</span><span class="chip">GGUF quantization</span><span class="chip">Corpus curation</span>
+      </div></div>
+
+      <div class="skill-block"><div class="skill-lab">CRM &amp; automation</div><div class="chips">
+        <span class="chip">Salesforce</span><span class="chip">Pardot</span><span class="chip">HubSpot</span><span class="chip">SendGrid</span><span class="chip">Constant Contact</span><span class="chip">Zapier</span><span class="chip">Custom CRM development</span><span class="chip">Email event tracking</span><span class="chip">Lead workflows</span>
+      </div></div>
+
+      <div class="skill-block"><div class="skill-lab">Email marketing</div><div class="chips">
+        <span class="chip">Responsive HTML email</span><span class="chip">AMPscript</span><span class="chip">Dynamic content</span><span class="chip">Segmentation</span><span class="chip">A/B testing</span><span class="chip">Litmus QA</span><span class="chip">MSO conditional code</span><span class="chip">Dark-mode support</span><span class="chip">Deliverability reporting</span>
+      </div></div>
+
+      <div class="skill-block"><div class="skill-lab">CMS, commerce &amp; learning</div><div class="chips">
+        <span class="chip">WordPress</span><span class="chip">Squarespace</span><span class="chip">WooCommerce</span><span class="chip">Moodle</span><span class="chip">Edwiser Bridge</span><span class="chip">MediaWiki</span><span class="chip">SCORM authoring</span><span class="chip">Custom themes &amp; plugins</span>
+      </div></div>
+
+      <div class="skill-block"><div class="skill-lab">SEO, paid media &amp; analytics</div><div class="chips">
+        <span class="chip">GA4</span><span class="chip">Google Tag Manager</span><span class="chip">Search Console</span><span class="chip">Google Ads</span><span class="chip">Keyword Planner</span><span class="chip">SEMrush</span><span class="chip">Conversion tracking</span><span class="chip">HAR analysis</span><span class="chip">Technical SEO</span><span class="chip">Content optimization</span>
+      </div></div>
+
+      <div class="skill-block"><div class="skill-lab">Privacy &amp; compliance</div><div class="chips">
+        <span class="chip">CCPA consent architecture</span><span class="chip">Tag governance</span><span class="chip">Pre-consent tracking analysis</span><span class="chip">Preference behavior</span><span class="chip">Compliance remediation</span>
+      </div></div>
+
+      <div class="skill-block"><div class="skill-lab">Design &amp; creative</div><div class="chips">
+        <span class="chip">Figma</span><span class="chip">Adobe Creative Suite</span><span class="chip">Procreate</span><span class="chip">UI/UX</span><span class="chip">Print &amp; digital design</span><span class="chip">Web graphics</span><span class="chip">Brand systems</span>
+      </div></div>
+
+      <div class="skill-block"><div class="skill-lab">Tools &amp; collaboration</div><div class="chips">
+        <span class="chip">Git/GitHub</span><span class="chip">VS Code</span><span class="chip">Visual Studio</span><span class="chip">Google Colab</span><span class="chip">Mac development</span><span class="chip">Command line</span><span class="chip">Issue diagnosis</span><span class="chip">Requirements &amp; QA</span>
+      </div></div>
+
+      <div class="skill-block"><div class="skill-lab">Writing &amp; communication</div><div class="chips">
+        <span class="chip">Copywriting</span><span class="chip">Technical writing</span><span class="chip">Product messaging</span><span class="chip">Content strategy</span><span class="chip">Brand voice</span><span class="chip">Training material</span><span class="chip">Sales enablement</span><span class="chip">Long-form writing</span><span class="chip">Editorial judgment</span>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- CERTS -->
+  <section class="sec" id="certs">
+    <div class="gutter"><span class="nm">Credentials</span></div>
+    <div>
+      <h2 class="sec-h">Certifications and education</h2>
+      <div class="cert-grid">
+        <div>
+          <p class="cert-h">AI &amp; emerging technology</p>
+          <ul>
+            <li>Generative AI: Prompt Engineering Basics<span>IBM</span></li>
+            <li>Generative AI: Introduction and Applications<span>IBM</span></li>
+            <li>Claude Code: Software Engineering with Generative AI<span>Vanderbilt University</span></li>
+            <li>Model Context Protocol Mastery<span>Fractal Analytics</span></li>
+            <li>Model Context Protocol: Hands-On with Agentic AI<span>LinkedIn Learning</span></li>
+            <li>Google AI Essentials<span>Google</span></li>
+            <li>Maximize Productivity With AI Tools<span>Google</span></li>
+            <li>Discover the Art of Prompting<span>Google</span></li>
+          </ul>
+        </div>
+        <div>
+          <p class="cert-h">Marketing, analytics &amp; search</p>
+          <ul>
+            <li>Google SEO Fundamentals<span>University of California, Davis</span></li>
+            <li>Google Analytics Certification<span>Skillshop</span></li>
+            <li>Foundations of Digital Marketing and E-Commerce<span>Google</span></li>
+          </ul>
+        </div>
+        <div>
+          <p class="cert-h">Education &amp; technical training</p>
+          <ul>
+            <li>Kennesaw State University<span>Computer Science Studies, 2017</span></li>
+            <li>Tech Talent South<span>Full Stack Web Developer, 2015</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top:3.5rem">
+        <p class="cert-h" style="border-bottom:1px solid var(--rule-strong);max-width:100%">Additional professional strengths</p>
+        <p class="str">Combines technical depth with marketing judgment and can move from strategy and discovery into implementation, testing, documentation, and refinement.</p>
+        <p class="str">Experienced in both fully remote and in-office work, with strong independent ownership and cross-functional communication.</p>
+        <p class="str">Able to work inside existing legacy systems while also designing modern applications, interfaces, and workflows.</p>
+        <p class="str">Comfortable explaining technical concepts to nontechnical stakeholders and turning unclear requests into concrete deliverables.</p>
+        <p class="str">Brings a strong visual and editorial sensibility to technical work, improving both usability and presentation quality.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="end" id="contact">
+    <h2>Send me a URL. I will tell you <em>what's broken.</em></h2>
+    <p>Let's talk.</p>
+    <div class="end-links">
+      <a href="mailto:danielle@craftedstrategy.com">danielle@craftedstrategy.com</a>
+      <span style="color:rgba(233,236,247,.55)"></span>
+    </div>
+    <div class="colophon">
+      <span>Crafted Strategy</span>
+      <span>Marketing engineering &middot; AI integration &middot; Full-stack development</span>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('.rail a:not(.rail-mark)'));
+  if(links.length){
+    var targets = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(!e.isIntersecting) return;
+        var i = targets.indexOf(e.target);
+        links.forEach(function(l,n){ l.classList.toggle('on', n === i); });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    targets.forEach(function(t){ if(t) obs.observe(t); });
+  }
+
+  var ro = document.querySelector('.readout');
+  if(ro){
+    var obs2 = new IntersectionObserver(function(entries, o){
+      if(entries[0].isIntersecting){ ro.classList.add('live'); o.disconnect(); }
+    }, { threshold: .35 });
+    obs2.observe(ro);
+  }
+})();
+</script>
+</body>
+</html>
